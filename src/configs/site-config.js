@@ -12,20 +12,8 @@ const siteConfig = {
     author: {
         name: "Sangpil Jung",
         accounts: [
-            // {
-            //     url: "https://github.com/MA-Ahmad",
-            //     label: "Github Account",
-            //     type: "gray",
-            //     icon: <FaGithub />,
-            // },
-            // {
-            //     url: "https://dev.to/m_ahmad",
-            //     label: "Dev Account",
-            //     type: "gray",
-            //     icon: <FaDev />,
-            // },
             {
-                url: "www.linkedin.com/in/philip-jung-b546181a3",
+                url: "https://www.linkedin.com/in/philip-jung-b546181a3",
                 label: "LinkedIn Account",
                 type: "linkedin",
                 icon: <FaLinkedin />,

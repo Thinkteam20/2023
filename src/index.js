@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contacts";
 import Resume from "./components/Resume";
+import NotFound from "./components/NotFound";
 
 // const container = document.getElementById("root");
 // if (!container) throw new Error("Failed to find the root element");
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        // errorElement: <NotFound />,
+        errorElement: <NotFound />,
         children: [
             { index: true, path: "/", element: <Home /> },
             { path: "/about", element: <About /> },

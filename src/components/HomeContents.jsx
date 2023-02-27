@@ -76,10 +76,10 @@ export default function HomeContents({ bg }) {
                     </Flex>
                     <Stack direction='row' h='100%' p={4}>
                         <Divider orientation='vertical' />
-                        <Code colorScheme='purple' children='diligent' />
-                        <Code colorScheme='red' children='consistent' />
-                        <Code colorScheme='yellow' children='honest' />
-                        <Code colorScheme='blue' children='resilience' />
+                        <Code colorScheme='purple' children='Prudent' />
+                        <Code colorScheme='red' children='Consistent' />
+                        <Code colorScheme='yellow' children='Honest' />
+                        <Code colorScheme='blue' children='Resilience' />
                     </Stack>
                     <MotionBox
                         w='100%'

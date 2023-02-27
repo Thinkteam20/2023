@@ -69,7 +69,7 @@ const MyForm = () => {
 
     return (
         <Box>
-            <Text>CONTACTS</Text>
+            <Text fontWeight='bold'>CONTACTS</Text>
             <form onSubmit={handleSubmit}>
                 <FormControl id='name' isRequired mt={5}>
                     <FormLabel>Name</FormLabel>

@@ -8,6 +8,7 @@ import {
     Icon,
     HStack,
     useColorModeValue,
+    Badge,
 } from "@chakra-ui/react";
 import { FaReact, FaBitbucket, FaAws } from "react-icons/fa";
 import { SiJquery, SiMysql, SiDotnet, SiElectron } from "react-icons/si";
@@ -94,7 +95,7 @@ const getIconComponent = (iconName) => {
 export const projects = [
     {
         id: 1,
-        name: "One Dream Community",
+        name: "One Dream Community ",
         description: `This is a NDIS management website for the NDIS clients, Internal NDIA and aged care teams. 
            It helps to collaborate and manage all of stakeholders XERO payroll in one place, matching helpers and invoices`,
         stack: {
@@ -106,6 +107,7 @@ export const projects = [
         },
         img: "https://res.cloudinary.com/dlnh85cl7/image/upload/v1676592964/portfolio/odc-min_twexrv.jpg",
         fontColor: "#87BD42",
+        badge: true,
     },
     {
         id: 2,
@@ -138,7 +140,7 @@ export default function Projects() {
                 mt={5}
                 fontWeight='bold'
             >
-                Projects
+                PROJECTS
                 <Stack pl={3}>
                     <Box as={BsFillBriefcaseFill} size='25px' />
                 </Stack>
@@ -183,6 +185,11 @@ export default function Projects() {
                                     rounded={"md"}
                                 >
                                     {project.name}
+                                    {project.badge && (
+                                        <Badge ml='1' colorScheme='blue'>
+                                            Most recent
+                                        </Badge>
+                                    )}
                                 </Text>
 
                                 <chakra.p
@@ -201,11 +208,6 @@ export default function Projects() {
                                 <Flex>
                                     <HStack align='center'>
                                         <Flex mt={2} align='center'>
-                                            {/* {Object.values(project.stack).map(
-                                            (data) => (
-                                                <div>{data}</div>
-                                            )
-                                        )} */}
                                             {Object.values(project.stack).map(
                                                 (data) => {
                                                     const IconComponent =

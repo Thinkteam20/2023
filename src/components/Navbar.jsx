@@ -103,10 +103,13 @@ export default function TopNav({ bg, text }) {
                         <Tooltip label='Linkedin'>
                             <IconButton
                                 as={Link}
-                                to={"https://github.com/MA-Ahmad"}
+                                href={
+                                    "https://www.linkedin.com/in/philip-jung-b546181a3"
+                                }
                                 size={"md"}
                                 icon={<FaLinkedin />}
-                                aria-label={"Github account"}
+                                isExternal
+                                aria-label={"Linkedin account"}
                                 bg={useColorModeValue("white", "gray.700")}
                                 _hover={{
                                     textDecoration: "none",
