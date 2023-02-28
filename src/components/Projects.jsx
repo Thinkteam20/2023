@@ -146,8 +146,9 @@ export default function Projects() {
                 </Stack>
             </Flex>
 
-            {projects.map((project) => (
+            {projects.map((project, index) => (
                 <MotionBox
+                    key={index}
                     whileHover={{ y: -5 }}
                     _hover={{
                         shadow: "lg",
@@ -209,12 +210,12 @@ export default function Projects() {
                                     <HStack align='center'>
                                         <Flex mt={2} align='center'>
                                             {Object.values(project.stack).map(
-                                                (data) => {
+                                                (data, idx) => {
                                                     const IconComponent =
                                                         getIconComponent(data);
                                                     if (IconComponent) {
                                                         const IconComp = (
-                                                            <div>
+                                                            <div key={idx}>
                                                                 {IconComponent}
                                                             </div>
                                                         );

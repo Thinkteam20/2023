@@ -156,6 +156,7 @@ export default function TopNav({ bg, text }) {
                         <Stack as={"nav"} spacing={4}>
                             {mobileLinks.map((link, index) => (
                                 <NavLink
+                                    key={index}
                                     name={link.name}
                                     path={link.path}
                                     onClose={onClose}

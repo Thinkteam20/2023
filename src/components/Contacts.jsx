@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
     FormControl,
     FormLabel,
     Input,
     Textarea,
     Button,
-    Select,
     Box,
     Flex,
     FormErrorMessage,
@@ -15,12 +15,14 @@ import {
 
 // testing
 const MyForm = () => {
+    // useEffect(() => {}, []);
+    const [loading, isLoading] = useState(false);
     const [formValues, setFormValues] = useState({
         name: "",
         phone: "",
-        address: "",
+        email: "",
         message: "",
-        dropbox: "",
+        file: "",
     });
 
     const [fileError, setFileError] = useState(null);
@@ -29,7 +31,10 @@ const MyForm = () => {
     const handleFileChange = (e) => {
         if (!e.target.files || !e.target.files[0]) {
             setFileError("Please select a file.");
-            setFormValues((prevValues) => ({ ...prevValues, file: undefined }));
+            setFormValues((prevValues) => ({
+                ...prevValues,
+                file: e.target.files[0],
+            }));
             return;
         }
 
@@ -44,26 +49,52 @@ const MyForm = () => {
         setFormValues((prevValues) => ({ ...prevValues, file }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formValues);
-        console.log(formValues.file);
-        toast({
-            title: "Form submitted",
-            description: "Thank you for your submission!",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-            position: "top-right",
-            variant: "solid",
-            colorScheme: "blue.100",
-        });
+        isLoading(true);
+        try {
+            const response = await axios.post(
+                "https://port2023.herokuapp.com/submit-form",
+                formValues,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            toast({
+                title: `${response.data}`,
+                description: "Thank you for your submission!",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "top-right",
+                variant: "solid",
+                colorScheme: "blue.100",
+            });
+            isLoading(false);
+            // console.log(response.data); // do something with response
+        } catch (error) {
+            console.log(error);
+            toast({
+                title: `${error.name}`,
+                description: `${error.message}`,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top-right",
+                variant: "solid",
+                // colorScheme: "blue.100",
+            });
+            isLoading(false);
+        }
+
         setFormValues({
             name: "",
             phone: "",
-            address: "",
+            email: "",
             message: "",
-            dropbox: "",
+            file: "",
         });
     };
 
@@ -86,9 +117,10 @@ const MyForm = () => {
                 </FormControl>
 
                 <FormControl id='phone' isRequired mt={5}>
-                    <FormLabel>Contact Number</FormLabel>
+                    <FormLabel>Phone</FormLabel>
                     <Input
                         type='text'
+                        value={formValues.phone}
                         onChange={(e) =>
                             setFormValues((prevValues) => ({
                                 ...prevValues,
@@ -98,15 +130,15 @@ const MyForm = () => {
                     />
                 </FormControl>
 
-                <FormControl id='address' isRequired mt={5}>
-                    <FormLabel>Address</FormLabel>
+                <FormControl id='email' isRequired mt={5}>
+                    <FormLabel>Email</FormLabel>
                     <Input
                         type='text'
-                        value={formValues.address}
+                        value={formValues.email}
                         onChange={(e) =>
                             setFormValues((prevValues) => ({
                                 ...prevValues,
-                                address: e.target.value,
+                                email: e.target.value,
                             }))
                         }
                     />
@@ -125,9 +157,13 @@ const MyForm = () => {
                     />
                 </FormControl>
 
-                <FormControl id='file' isRequired mt={5}>
+                <FormControl id='file' mt={5}>
                     <FormLabel>Position Description</FormLabel>
-                    <Input type='file' onChange={handleFileChange} />
+                    <Input
+                        type='file'
+                        accept='pdf'
+                        onChange={handleFileChange}
+                    />
                     {fileError && (
                         <FormErrorMessage>{fileError}</FormErrorMessage>
                     )}
@@ -135,7 +171,7 @@ const MyForm = () => {
 
                 <Flex justify='flex-end' mt={4}>
                     <Button colorScheme='blue' type='submit'>
-                        Submit
+                        {loading ? "...Sending" : "Submit"}
                     </Button>
                 </Flex>
             </form>
